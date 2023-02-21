@@ -1,0 +1,666 @@
+{
+    "config": {
+        "info_template": {
+            "Nordiska museet Bildminnen image": "description"
+        },
+        "relevant_sdc": [
+            "P180"
+        ]
+    },
+    "meta": {
+        "cutoff": "2022-01-10",
+        "files": 20,
+        "source": "Category:100 000 Bildminnen/Pilot upload",
+        "timestamp": "2023-02-21T09:09:36"
+    },
+    "results": [
+        {
+            "baseline_revision": 669314137,
+            "captions": {
+                "added": [
+                    {
+                        "sv": "D.M.Skidstafett vid Saltsjöbaden Dalkvist. \"Håsjö\" Östersunds SK"
+                    }
+                ],
+                "removed": []
+            },
+            "categories": {
+                "added": [
+                    "Gösta Glase",
+                    "Skiing in Sweden",
+                    "History of Saltsjöbaden",
+                    "100 000 Bildminnen/Pilot upload"
+                ],
+                "removed": []
+            },
+            "description": {
+                "changed": true,
+                "new": "{{sv|D.M.Skidstafett vid Saltsjöbaden Dalkvist. \"Håsjö\" Östersunds SK}}",
+                "old": null
+            },
+            "filename": "File:D.M.Skidstafett vid Saltsjöbaden Dalkvist - Nordiska museet - Frank 00044 14.tif",
+            "statements": {
+                "added": [],
+                "removed": []
+            },
+            "uploaded": "2022-06-28T12:13:57Z"
+        },
+        {
+            "baseline_revision": 669314130,
+            "captions": {
+                "added": [
+                    {
+                        "sv": "D.M.Skidstafett vid Saltsjöbaden Dalkvist. \"Håsjö\" Östersunds SK"
+                    }
+                ],
+                "removed": []
+            },
+            "categories": {
+                "added": [
+                    "Gösta Glase",
+                    "Skiing in Sweden",
+                    "History of Saltsjöbaden",
+                    "100 000 Bildminnen/Pilot upload"
+                ],
+                "removed": []
+            },
+            "description": {
+                "changed": true,
+                "new": "{{sv|D.M.Skidstafett vid Saltsjöbaden Dalkvist. \"Håsjö\" Östersunds SK}}",
+                "old": null
+            },
+            "filename": "File:D.M.Skidstafett vid Saltsjöbaden Dalkvist - Nordiska museet - Frank 00045 15.tiff",
+            "statements": {
+                "added": [
+                    [
+                        "P180",
+                        "Q4270517"
+                    ]
+                ],
+                "removed": []
+            },
+            "uploaded": "2022-06-28T12:13:55Z"
+        },
+        {
+            "baseline_revision": 669314141,
+            "captions": {
+                "added": [
+                    {
+                        "sv": "D.M.Skidstafett vid Saltsjöbaden Dalkvist. \"Håsjö\" Östersunds SK"
+                    }
+                ],
+                "removed": []
+            },
+            "categories": {
+                "added": [
+                    "Gösta Glase",
+                    "1945 black and white portrait photographs of men",
+                    "100 000 Bildminnen/Pilot upload"
+                ],
+                "removed": []
+            },
+            "description": {
+                "changed": true,
+                "new": "{{sv|D.M.Skidstafett vid Saltsjöbaden Dalkvist. \"Håsjö\" Östersunds SK}}",
+                "old": null
+            },
+            "filename": "File:D.M.Skidstafett vid Saltsjöbaden Dalkvist - Nordiska museet - Frank 00046 16.tiff",
+            "statements": {
+                "added": [],
+                "removed": []
+            },
+            "uploaded": "2022-06-28T12:13:59Z"
+        },
+        {
+            "baseline_revision": 669314211,
+            "captions": {
+                "added": [
+                    {
+                        "sv": "D.M.Skidstafett vid Saltsjöbaden Dalkvist. \"Håsjö\" Östersunds SK"
+                    }
+                ],
+                "removed": []
+            },
+            "categories": {
+                "added": [
+                    "Gösta Glase",
+                    "Skiing in Sweden",
+                    "History of Saltsjöbaden",
+                    "100 000 Bildminnen/Pilot upload"
+                ],
+                "removed": []
+            },
+            "description": {
+                "changed": true,
+                "new": "{{sv|D.M.Skidstafett vid Saltsjöbaden Dalkvist. \"Håsjö\" Östersunds SK}}",
+                "old": null
+            },
+            "filename": "File:D.M.Skidstafett vid Saltsjöbaden Dalkvist - Nordiska museet - Frank 00047 17.tiff",
+            "statements": {
+                "added": [
+                    [
+                        "P180",
+                        "Q4270517"
+                    ],
+                    [
+                        "P180",
+                        "Q7561"
+                    ]
+                ],
+                "removed": []
+            },
+            "uploaded": "2022-06-28T12:14:17Z"
+        },
+        {
+            "baseline_revision": 669321460,
+            "captions": {
+                "added": [
+                    {
+                        "sv": "D.M.Skidstafett vid Saltsjöbaden Dalkvist. \"Håsjö\" Östersunds SK"
+                    }
+                ],
+                "removed": []
+            },
+            "categories": {
+                "added": [
+                    "Gösta Glase",
+                    "Skiing in Sweden",
+                    "History of Saltsjöbaden",
+                    "100 000 Bildminnen/Pilot upload"
+                ],
+                "removed": []
+            },
+            "description": {
+                "changed": true,
+                "new": "{{sv|D.M.Skidstafett vid Saltsjöbaden Dalkvist. \"Håsjö\" Östersunds SK}}",
+                "old": null
+            },
+            "filename": "File:D.M.Skidstafett vid Saltsjöbaden Dalkvist - Nordiska museet - Frank 00048 18.tif",
+            "statements": {
+                "added": [],
+                "removed": []
+            },
+            "uploaded": "2022-06-28T12:45:30Z"
+        },
+        {
+            "baseline_revision": 669321479,
+            "captions": {
+                "added": [
+                    {
+                        "sv": "D.M.Skidstafett vid Saltsjöbaden Dalkvist. \"Håsjö\" Östersunds SK"
+                    }
+                ],
+                "removed": []
+            },
+            "categories": {
+                "added": [
+                    "Gösta Glase",
+                    "History of Saltsjöbaden",
+                    "100 000 Bildminnen/Pilot upload"
+                ],
+                "removed": []
+            },
+            "description": {
+                "changed": true,
+                "new": "{{sv|D.M.Skidstafett vid Saltsjöbaden Dalkvist. \"Håsjö\" Östersunds SK}}",
+                "old": null
+            },
+            "filename": "File:D.M.Skidstafett vid Saltsjöbaden Dalkvist - Nordiska museet - Frank 00049 19.tif",
+            "statements": {
+                "added": [],
+                "removed": []
+            },
+            "uploaded": "2022-06-28T12:45:34Z"
+        },
+        {
+            "baseline_revision": 669321467,
+            "captions": {
+                "added": [
+                    {
+                        "sv": "D.M.Skidstafett vid Saltsjöbaden Dalkvist. \"Håsjö\" Östersunds SK"
+                    }
+                ],
+                "removed": []
+            },
+            "categories": {
+                "added": [
+                    "Gösta Glase",
+                    "Skiing in Sweden",
+                    "History of Saltsjöbaden",
+                    "100 000 Bildminnen/Pilot upload"
+                ],
+                "removed": []
+            },
+            "description": {
+                "changed": true,
+                "new": "{{sv|D.M.Skidstafett vid Saltsjöbaden Dalkvist. \"Håsjö\" Östersunds SK}}",
+                "old": null
+            },
+            "filename": "File:D.M.Skidstafett vid Saltsjöbaden Dalkvist - Nordiska museet - Frank 00051 20.tif",
+            "statements": {
+                "added": [],
+                "removed": []
+            },
+            "uploaded": "2022-06-28T12:45:30Z"
+        },
+        {
+            "baseline_revision": 669321507,
+            "captions": {
+                "added": [
+                    {
+                        "sv": "Skidstafettåkare tar sig över mållinjen, 1945."
+                    },
+                    {
+                        "en": "Contestant crossing the goal line in a ski relay race , 1945."
+                    }
+                ],
+                "removed": []
+            },
+            "categories": {
+                "added": [
+                    "Gösta Glase",
+                    "Skiing in Sweden",
+                    "History of Saltsjöbaden",
+                    "100 000 Bildminnen/Pilot upload"
+                ],
+                "removed": []
+            },
+            "description": {
+                "changed": true,
+                "new": "{{sv|Skidåkare med nr. 50 tar sig över mållinjen under D.M. i Skidstafett vid Saltsjöbaden 1945.}}",
+                "old": null
+            },
+            "filename": "File:D.M.Skidstafett vid Saltsjöbaden Dalkvist - Nordiska museet - Frank 00052 21.tif",
+            "statements": {
+                "added": [
+                    [
+                        "P180",
+                        "Q4270517"
+                    ],
+                    [
+                        "P180",
+                        "Q7561"
+                    ]
+                ],
+                "removed": []
+            },
+            "uploaded": "2022-06-28T12:45:43Z"
+        },
+        {
+            "baseline_revision": 667667370,
+            "captions": {
+                "added": [
+                    {
+                        "sv": "Howard Frank. Lantstället"
+                    }
+                ],
+                "removed": []
+            },
+            "categories": {
+                "added": [
+                    "Photographs by K.W. Gullers",
+                    "1957 black and white photographs",
+                    "100 000 Bildminnen/Pilot upload"
+                ],
+                "removed": []
+            },
+            "description": {
+                "changed": true,
+                "new": "{{sv|Howard Frank. Lantstället}}",
+                "old": null
+            },
+            "filename": "File:Howard Frank. Lantstället - Nordiska museet - Frank 00031 02.tif",
+            "statements": {
+                "added": [
+                    [
+                        "P180",
+                        "Q726"
+                    ]
+                ],
+                "removed": []
+            },
+            "uploaded": "2022-06-23T09:45:20Z"
+        },
+        {
+            "baseline_revision": 667690312,
+            "captions": {
+                "added": [
+                    {
+                        "sv": "Howard Frank. Lantstället"
+                    }
+                ],
+                "removed": []
+            },
+            "categories": {
+                "added": [
+                    "Photographs by K.W. Gullers",
+                    "1957 black and white photographs",
+                    "100 000 Bildminnen/Pilot upload"
+                ],
+                "removed": []
+            },
+            "description": {
+                "changed": true,
+                "new": "{{sv|Howard Frank. Lantstället}}",
+                "old": null
+            },
+            "filename": "File:Howard Frank. Lantstället - Nordiska museet - Frank 00032 03.tif",
+            "statements": {
+                "added": [
+                    [
+                        "P180",
+                        "Q726"
+                    ]
+                ],
+                "removed": []
+            },
+            "uploaded": "2022-06-23T11:32:59Z"
+        },
+        {
+            "baseline_revision": 667690315,
+            "captions": {
+                "added": [
+                    {
+                        "sv": "Howard Frank. Lantstället"
+                    }
+                ],
+                "removed": []
+            },
+            "categories": {
+                "added": [
+                    "Photographs by K.W. Gullers",
+                    "1957 black and white photographs",
+                    "100 000 Bildminnen/Pilot upload"
+                ],
+                "removed": []
+            },
+            "description": {
+                "changed": true,
+                "new": "{{sv|Howard Frank. Lantstället}}",
+                "old": null
+            },
+            "filename": "File:Howard Frank. Lantstället - Nordiska museet - Frank 00034 04.tif",
+            "statements": {
+                "added": [],
+                "removed": []
+            },
+            "uploaded": "2022-06-23T11:33:00Z"
+        },
+        {
+            "baseline_revision": 667690303,
+            "captions": {
+                "added": [
+                    {
+                        "sv": "Howard Frank. Lantstället"
+                    }
+                ],
+                "removed": []
+            },
+            "categories": {
+                "added": [
+                    "Photographs by K.W. Gullers",
+                    "1957 black and white photographs",
+                    "100 000 Bildminnen/Pilot upload"
+                ],
+                "removed": []
+            },
+            "description": {
+                "changed": true,
+                "new": "{{sv|Howard Frank. Lantstället}}",
+                "old": null
+            },
+            "filename": "File:Howard Frank. Lantstället - Nordiska museet - Frank 00035 05.tif",
+            "statements": {
+                "added": [],
+                "removed": []
+            },
+            "uploaded": "2022-06-23T11:32:57Z"
+        },
+        {
+            "baseline_revision": 667697257,
+            "captions": {
+                "added": [
+                    {
+                        "sv": "Howard Frank. Lantstället"
+                    }
+                ],
+                "removed": []
+            },
+            "categories": {
+                "added": [
+                    "Photographs by K.W. Gullers",
+                    "1957 black and white photographs",
+                    "100 000 Bildminnen/Pilot upload"
+                ],
+                "removed": []
+            },
+            "description": {
+                "changed": true,
+                "new": "{{sv|Howard Frank. Lantstället}}",
+                "old": null
+            },
+            "filename": "File:Howard Frank. Lantstället - Nordiska museet - Frank 00036 06.tif",
+            "statements": {
+                "added": [],
+                "removed": []
+            },
+            "uploaded": "2022-06-23T12:02:00Z"
+        },
+        {
+            "baseline_revision": 667697269,
+            "captions": {
+                "added": [
+                    {
+                        "sv": "Howard Frank. Lantstället"
+                    }
+                ],
+                "removed": []
+            },
+            "categories": {
+                "added": [
+                    "Photographs by K.W. Gullers",
+                    "1957 black and white photographs",
+                    "100 000 Bildminnen/Pilot upload"
+                ],
+                "removed": []
+            },
+            "description": {
+                "changed": true,
+                "new": "{{sv|Howard Frank. Lantstället}}",
+                "old": null
+            },
+            "filename": "File:Howard Frank. Lantstället - Nordiska museet - Frank 00037 07.tif",
+            "statements": {
+                "added": [],
+                "removed": []
+            },
+            "uploaded": "2022-06-23T12:02:03Z"
+        },
+        {
+            "baseline_revision": 667697253,
+            "captions": {
+                "added": [
+                    {
+                        "sv": "Howard Frank. Lantstället"
+                    }
+                ],
+                "removed": []
+            },
+            "categories": {
+                "added": [
+                    "Photographs by K.W. Gullers",
+                    "1957 black and white photographs",
+                    "100 000 Bildminnen/Pilot upload"
+                ],
+                "removed": []
+            },
+            "description": {
+                "changed": true,
+                "new": "{{sv|Howard Frank. Lantstället}}",
+                "old": null
+            },
+            "filename": "File:Howard Frank. Lantstället - Nordiska museet - Frank 00038 08.tif",
+            "statements": {
+                "added": [],
+                "removed": []
+            },
+            "uploaded": "2022-06-23T12:01:59Z"
+        },
+        {
+            "baseline_revision": 667697434,
+            "captions": {
+                "added": [
+                    {
+                        "sv": "Howard Frank. Lantstället"
+                    }
+                ],
+                "removed": []
+            },
+            "categories": {
+                "added": [
+                    "Photographs by K.W. Gullers",
+                    "1957 black and white photographs",
+                    "100 000 Bildminnen/Pilot upload"
+                ],
+                "removed": []
+            },
+            "description": {
+                "changed": true,
+                "new": "{{sv|Howard Frank. Lantstället}}",
+                "old": null
+            },
+            "filename": "File:Howard Frank. Lantstället - Nordiska museet - Frank 00039 09.tif",
+            "statements": {
+                "added": [],
+                "removed": []
+            },
+            "uploaded": "2022-06-23T12:02:39Z"
+        },
+        {
+            "baseline_revision": 667711967,
+            "captions": {
+                "added": [
+                    {
+                        "sv": "Howard Frank. Lantstället"
+                    }
+                ],
+                "removed": []
+            },
+            "categories": {
+                "added": [
+                    "Photographs by K.W. Gullers",
+                    "1957 black and white photographs",
+                    "100 000 Bildminnen/Pilot upload"
+                ],
+                "removed": []
+            },
+            "description": {
+                "changed": true,
+                "new": "{{sv|Howard Frank. Lantstället}}",
+                "old": null
+            },
+            "filename": "File:Howard Frank. Lantstället - Nordiska museet - Frank 00040 10.tif",
+            "statements": {
+                "added": [],
+                "removed": []
+            },
+            "uploaded": "2022-06-23T13:10:59Z"
+        },
+        {
+            "baseline_revision": 667711965,
+            "captions": {
+                "added": [
+                    {
+                        "sv": "Howard Frank. Lantstället"
+                    }
+                ],
+                "removed": []
+            },
+            "categories": {
+                "added": [
+                    "Photographs by K.W. Gullers",
+                    "Continental Mark II",
+                    "1957 black and white photographs",
+                    "100 000 Bildminnen/Pilot upload"
+                ],
+                "removed": []
+            },
+            "description": {
+                "changed": true,
+                "new": "{{sv|Howard Frank. Lantstället}}",
+                "old": null
+            },
+            "filename": "File:Howard Frank. Lantstället - Nordiska museet - Frank 00041 11.tif",
+            "statements": {
+                "added": [
+                    [
+                        "P180",
+                        "Q1420"
+                    ]
+                ],
+                "removed": []
+            },
+            "uploaded": "2022-06-23T13:10:58Z"
+        },
+        {
+            "baseline_revision": 667711973,
+            "captions": {
+                "added": [
+                    {
+                        "sv": "Howard Frank. Lantstället"
+                    }
+                ],
+                "removed": []
+            },
+            "categories": {
+                "added": [
+                    "Photographs by K.W. Gullers",
+                    "1957 black and white photographs",
+                    "100 000 Bildminnen/Pilot upload"
+                ],
+                "removed": []
+            },
+            "description": {
+                "changed": true,
+                "new": "{{sv|Howard Frank. Lantstället}}",
+                "old": null
+            },
+            "filename": "File:Howard Frank. Lantstället - Nordiska museet - Frank 00042 12.tif",
+            "statements": {
+                "added": [],
+                "removed": []
+            },
+            "uploaded": "2022-06-23T13:11:01Z"
+        },
+        {
+            "baseline_revision": 667712012,
+            "captions": {
+                "added": [
+                    {
+                        "sv": "Howard Frank. Lantstället"
+                    }
+                ],
+                "removed": []
+            },
+            "categories": {
+                "added": [
+                    "Photographs by K.W. Gullers",
+                    "1957 black and white photographs",
+                    "100 000 Bildminnen/Pilot upload"
+                ],
+                "removed": []
+            },
+            "description": {
+                "changed": true,
+                "new": "{{sv|Howard Frank. Lantstället}}",
+                "old": null
+            },
+            "filename": "File:Howard Frank. Lantstället - Nordiska museet - Frank 00043 13.tif",
+            "statements": {
+                "added": [],
+                "removed": []
+            },
+            "uploaded": "2022-06-23T13:11:13Z"
+        }
+    ]
+}
