@@ -76,6 +76,9 @@ TODO
 
 
 class Assistant(object):
+
+    def array_to_string(self, array, delimiter):
+        return delimiter.join(array)
     
     def package_results(self, results, cutoff, source, output_format):
         config_data = self.config.dump_self()
@@ -99,8 +102,8 @@ class Assistant(object):
                 result_row = "\t".join([r["filename"],
                                        r["uploaded"],
                                        r["baseline_revision"],
-                                       str(r["categories"]["removed"]),
-                                       str(r["categories"]["added"]),
+                                       self.array_to_string(r["categories"]["removed"], "|"),
+                                       self.array_to_string(r["categories"]["added"], "|"),
                                        r["description"]["old"],
                                        r["description"]["new"],
                                        str(r["statements"]["added"]),
