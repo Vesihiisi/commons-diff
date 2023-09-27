@@ -114,11 +114,12 @@ class Assistant(object):
         if output_format == "json":
             with open(filename, "w", encoding='utf8') as datafile:
                 json.dump(data, datafile, ensure_ascii=False, sort_keys=True, indent=4)
-                print("Saved data of {} files to {}".format(len(data), filename))
         elif output_format == "csv":
-            with open('test_csv_file.tsv', 'w') as f:
+            with open(filename, 'w') as f:
                 for line in data: 
                     f.write(f"{line}\n")
+        print("Saved data of {} files to {}".format(len(data), filename))
+
     
     def read_data_filelist(self, filename):
         datalist = []
@@ -358,17 +359,18 @@ def main(arguments):
     assistant = Assistant(Config(arguments.get("config")), site)
     
     history_dump = []
-    
-    if arguments.get("out"):
-        filename = arguments.get("out")
-    else:
-        filename = "out_{}.json".format(datetime.datetime.now().replace(microsecond=0).isoformat())
 
     if arguments.get("format"):
         if arguments.get("format").lower() in ["csv", "json"]:
             output_format = arguments.get("format").lower()
     else:
-        output_format = "json"      
+        output_format = "json"
+
+    if arguments.get("out"):
+        filename = arguments.get("out")
+    else:
+        filename = "out_{}.{}".format(datetime.datetime.now().replace(microsecond=0).isoformat(),
+                                     output_format)
         
     
     
