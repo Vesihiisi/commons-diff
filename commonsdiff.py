@@ -77,6 +77,16 @@ TODO
 
 class Assistant(object):
 
+    def get_label_from_wd_item(self, qid, language_code, fallback_language_code):
+        site = pywikibot.Site("wikidata", "wikidata")
+        repo = site.data_repository()
+        item = pywikibot.ItemPage(repo, qid)
+        item_dict = item.get()
+        item_label = item_dict["labels"].get(language_code)
+        if not item_label:
+            item_label = item_dict["labels"].get(fallback_language_code)
+    
+    
     def array_to_string(self, array, delimiter):
         return delimiter.join(array)
     
