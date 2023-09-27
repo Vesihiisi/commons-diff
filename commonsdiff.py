@@ -93,13 +93,15 @@ class Assistant(object):
                            }
                    }
         elif output_format == "csv":
-            headers = ["filename", "file_uploaded", "baseline_revision",
+            headers = ["changes_after", "filename", "file_uploaded", "baseline_revision",
                        "categories_removed", "categories_added", "description_old",
                        "description_current", "statements_added", "statements_removed"]
             header_row = ("\t").join(headers)
             result_rows = [header_row]
             for r in results:
-                result_row = "\t".join([r["filename"],
+                result_row = "\t".join([
+                                       cutoff,
+                                       r["filename"],
                                        r["uploaded"],
                                        r["baseline_revision"],
                                        self.array_to_string(r["categories"]["removed"], "|"),
@@ -115,13 +117,16 @@ class Assistant(object):
     
     def results_to_file(self, data, filename, output_format):
         if output_format == "json":
+            number_of_files = len(data)
             with open(filename, "w", encoding='utf8') as datafile:
                 json.dump(data, datafile, ensure_ascii=False, sort_keys=True, indent=4)
         elif output_format == "csv":
+            number_of_files = len(data) - 1
             with open(filename, 'w') as f:
                 for line in data: 
                     f.write(f"{line}\n")
-        print("Saved data of {} files to {}".format(len(data), filename))
+        print("Saved data of {} files to {}".format(number_of_files,
+                                                    filename))
 
     
     def read_data_filelist(self, filename):
