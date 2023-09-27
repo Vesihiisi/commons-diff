@@ -1,77 +1,124 @@
-"""Process changes to file pages on Wikimedia Commons since a specific date
-
-Extracts changes that have been since the defined date to
-
-* a specific field in the information template
-* SDC captions
-* selected SDC statements.
-
-For example output, see example_output.json
-
-USAGE PARAMETERS
-
-* --cutoff 2023-01-10
-
-Grab changes from the specific date
-
-* --list inputlist.txt
-* --category "Name of category on Commons"
-
-Use either of these to specify which files to use.
-If using --list, the list must consist of a list of files, eg
-
-Damskor - Nordiska museet - Nordiska kompaniet NK K3c 1 0134.tif
-Damskor - Nordiska museet - Nordiska kompaniet NK K3c 1 0130.tif
-
--- config configfile.json
-
-This file defines which changes to grab. It must be structured like
-
-{
-    "info_template": {"Nordiska museet Bildminnen image" : "description"},
-    "relevant_sdc": ["P180"]
-}
-
-The three things we specify are 1) which infotemplate to process, 2) inside the
-infotemplate, which field to process (contains descriptions to diff), 3) which SDC
-statements to diff (P180 is depicts).
-
-* --out outputfile.json
-
-Optional, name of output file. If not used, a generic timestamped filename will
-be used.
-
-"""
-
 import argparse
 import dateutil.parser as date_parser
 import datetime
-import json
+import json # for packaging the output
 import pywikibot
 import mwparserfromhell
 import re
 import requests
 
 
+"""
+
+https://commons.wikimedia.org/wiki/Special:ApiSandbox#action=query&format=json&prop=contributors%7Crevisions&titles=File%3AFoo.jpg&formatversion=2
+
+
+EXKLUDERA BOTAR -> https://commons.wikimedia.org/wiki/Special:ApiSandbox#action=query&format=json&prop=contributors%7Crevisions&titles=File%3AFoo.jpg&formatversion=2&pcexcludegroup=bot
+
+
+
+https://doc.wikimedia.org/pywikibot/stable/api_ref/pywikibot.page.html#page.BasePage.contributors
+
+
+
+USAGE
+
+python3 commons_diff_bildminnen.py --list inputlist.txt --cutoff 2023-01-10 --config configfile.json
+
+* inputlist.txt contains a list of files, eg
+
+Damskor - Nordiska museet - Nordiska kompaniet NK K3c 1 0134.tif
+Damskor - Nordiska museet - Nordiska kompaniet NK K3c 1 0130.tif
+
+* configfile.json looks like
+
+{
+    "info_template": {"Nordiska museet Bildminnen image" : "description"},
+    "relevant_sdc": ["P180"]
+}
+
+So the three things we specify are 1) which infotemplate to process, 2) inside the
+infotemplate, which field to process (contains descriptions to diff), 3) which SDC
+statements to diff (P180 is depicts).
+
+OUTPUT contains
+
+
+meta
+
+
+config
+
+* baseline_revision: 724624878
+* captions: [{'sv': 'Sked, kniv och gaffel'}, {'en': 'Spoon, knife and fork'}]
+* categories, added and removed (relative to cutoff time)
+* description:
+** changed: T/F
+** new
+** old
+* filename
+* statements:
+** added: [('P180', 'Q81895'), ('P180', 'Q32489'), ('P180', 'Q81881')]
+** removed (same format)
+
+The output is a json dumped to a file.
+
+TODO
+
+* Add current revision ID to file data dump.
+
+
+* Do we want to include WHO made the change
+** and would that be horrible to write
+
+
+"""
+
+
 class Assistant(object):
     
-    def package_results(self, results, cutoff, source):
+    def package_results(self, results, cutoff, source, output_format):
         config_data = self.config.dump_self()
         timestamp = datetime.datetime.now().replace(microsecond=0).isoformat()
-        return {"config": config_data,
-                "results": results,
-                "meta":{"timestamp": timestamp,
-                        "cutoff": cutoff,
-                        "source": source,
-                        "files": len(results)
-                       }
-               }
-        
+        if output_format == "json":
+            packaged_results = {"config": config_data,
+                    "results": results,
+                    "meta":{"timestamp": timestamp,
+                            "cutoff": cutoff,
+                            "source": source,
+                            "files": len(results)
+                           }
+                   }
+        elif output_format == "csv":
+            headers = ["filename", "file_uploaded", "baseline_revision",
+                       "categories_removed", "categories_added", "description_old",
+                       "description_current", "statements_added", "statements_removed"]
+            header_row = ("\t").join(headers)
+            result_rows = [header_row]
+            for r in results:
+                result_row = "\t".join([r["filename"],
+                                       r["uploaded"],
+                                       r["baseline_revision"],
+                                       str(r["categories"]["removed"]),
+                                       str(r["categories"]["added"]),
+                                       r["description"]["old"],
+                                       r["description"]["new"],
+                                       str(r["statements"]["added"]),
+                                       str(r["statements"]["removed"]),
+                                      ])
+                result_rows.append(result_row)
+            packaged_results = result_rows
+        return packaged_results
     
-    def json_to_file(self, data, filename):
-        with open(filename, "w", encoding='utf8') as datafile:
-            json.dump(data, datafile, ensure_ascii=False, sort_keys=True, indent=4)
-            print("Saved data of {} files to {}".format(len(data), filename))
+    def results_to_file(self, data, filename, output_format):
+        if output_format == "json":
+            with open(filename, "w", encoding='utf8') as datafile:
+                json.dump(data, datafile, ensure_ascii=False, sort_keys=True, indent=4)
+                print("Saved data of {} files to {}".format(len(data), filename))
+        elif output_format == "csv":
+            with open('test_csv_file.tsv', 'w') as f:
+                for line in data: 
+                    f.write(f"{line}\n")
     
     def read_data_filelist(self, filename):
         datalist = []
@@ -86,7 +133,7 @@ class Assistant(object):
         datalist = []
         print("Loading files from category: {}".format(categoryname))
         cat = pywikibot.Category(self.site, categoryname)
-        for x in cat.members(member_type=['file']):
+        for x in cat.articles(namespaces=-2):
             datalist.append(x.title())
         return datalist
         
@@ -115,6 +162,7 @@ class Assistant(object):
 class Config(object):
     
     def load_json_file(self, filepath):
+        # probably want to validate somehow
         with open(filepath) as json_file:
             return json.loads(json_file.read())
     
@@ -223,6 +271,8 @@ class CommonsFile(object):
                 for key in old_sdc_labels.keys():
                     old_captions.append({key:labels.get(key).get('value')})
         
+        # now we compare old and new captions
+        
         for captionpair in captions:
             if captionpair not in old_captions:
                 added_captions.append(captionpair)
@@ -261,6 +311,7 @@ class CommonsFile(object):
                         old_statement_value = y.get("mainsnak").get("datavalue").get("value").get("id")
                         old_statements.append((old_statement_property, old_statement_value))
 
+
         for stmnt in current_statements:
             if stmnt not in old_statements:
                 added_statements.append(stmnt)
@@ -279,7 +330,7 @@ class CommonsFile(object):
         self.baseline_page_content = self.commons_page.getOldVersion(self.baseline_revision.revid)
         self.current_page_content = self.commons_page.text
         self.sdc = self.get_sdc()
-        self.file_history_data["baseline_revision"] = self.baseline_revision.revid
+        self.file_history_data["baseline_revision"] = str(self.baseline_revision.revid)
         self.file_history_data["categories"] = self.process_categories()
         self.file_history_data["description"] = self.process_descriptions()
         self.file_history_data["captions"] = self.process_captions()
@@ -313,12 +364,21 @@ def main(arguments):
     else:
         filename = "out_{}.json".format(datetime.datetime.now().replace(microsecond=0).isoformat())
 
+    if arguments.get("format"):
+        if arguments.get("format").lower() in ["csv", "json"]:
+            output_format = arguments.get("format").lower()
+    else:
+        output_format = "json"      
+        
+    
+    
     if arguments.get("category"):
         source = "Category:{}".format(arguments.get("category"))
         files = assistant.read_data_category(arguments.get("category"))
     elif arguments.get("list"):
         source = arguments.get("list")
         files = assistant.read_data_filelist(arguments.get("list"))
+    print("Output format: ", output_format)
     for fname in files:
         try:
             commons_file = CommonsFile(fname, assistant, cutoff, site)
@@ -327,9 +387,9 @@ def main(arguments):
             continue
         history_dump.append(commons_file.file_history_data)
     
-    results = assistant.package_results(history_dump, cutoff, source)
+    results = assistant.package_results(history_dump, cutoff, source, output_format)
     
-    assistant.json_to_file(results, filename)
+    assistant.results_to_file(results, filename, output_format)
 
 
 if __name__ == "__main__":
@@ -340,5 +400,6 @@ if __name__ == "__main__":
     parser.add_argument("--cutoff", required=True)
     parser.add_argument("--config", required=True)
     parser.add_argument("--out", required=False)
+    parser.add_argument("--format")
     args = parser.parse_args()
     main(vars(args))
