@@ -1,31 +1,27 @@
-import argparse
-import dateutil.parser as date_parser
-import datetime
-import json # for packaging the output
-import pywikibot
-import mwparserfromhell
-import re
-import requests
+"""Process changes to file pages on Wikimedia Commons since a specific date
 
+Extracts changes that have been made since the defined date to:
 
-"""
+* a specific field in the information template
+* SDC captions
+* selected SDC statements.
 
-https://commons.wikimedia.org/wiki/Special:ApiSandbox#action=query&format=json&prop=contributors%7Crevisions&titles=File%3AFoo.jpg&formatversion=2
+For example output, see example_output.json
 
+If the file was uploaded after the defined date then the first edits by
+the uploader are excluded (as e.g. SDC is added in a separate edit from the upload).
 
-EXKLUDERA BOTAR -> https://commons.wikimedia.org/wiki/Special:ApiSandbox#action=query&format=json&prop=contributors%7Crevisions&titles=File%3AFoo.jpg&formatversion=2&pcexcludegroup=bot
+USAGE PARAMETERS
 
+* --cutoff 2023-01-10
 
+Grab changes from the specific date
 
-https://doc.wikimedia.org/pywikibot/stable/api_ref/pywikibot.page.html#page.BasePage.contributors
+* --list inputlist.txt
+* --category "Name of category on Commons"
 
-
-
-USAGE
-
-python3 commons_diff_bildminnen.py --list inputlist.txt --cutoff 2023-01-10 --config configfile.json
-
-* inputlist.txt contains a list of files, eg
+Use either of these to specify which files to use.
+If using --list, the list must consist of a list of files, eg
 
 Damskor - Nordiska museet - Nordiska kompaniet NK K3c 1 0134.tif
 Damskor - Nordiska museet - Nordiska kompaniet NK K3c 1 0130.tif
@@ -41,8 +37,22 @@ So the three things we specify are 1) which infotemplate to process, 2) inside t
 infotemplate, which field to process (contains descriptions to diff), 3) which SDC
 statements to diff (P180 is depicts).
 
+* --out outputfile.json
+
+Optional, name of output file. If not used, a generic timestamped filename will
+be used.
 
 """
+
+import argparse
+import datetime
+import json
+import re
+
+import dateutil.parser as date_parser
+import pywikibot
+import mwparserfromhell
+import requests
 
 
 class Assistant(object):
@@ -192,6 +202,13 @@ class CommonsFile(object):
 
 
     def get_baseline_revision(self):
+        """
+        Return the first revision after the cutoff date.
+
+        If the file was uploaded after the cutoff date then this returns the first
+        revision by another user than the uploader, or the last revision if no other
+        users have interacted with the file.
+        """
         baseline_date = self.assistant.create_pywikibot_timestamp(self.cutoff)
         all_revisions = list(self.commons_page.revisions())
         revs_before_cutoff = []
@@ -199,11 +216,23 @@ class CommonsFile(object):
             if revision.timestamp < baseline_date:
                 revs_before_cutoff.append(revision)
         if len(revs_before_cutoff) == 0:
-            baseline_revision = all_revisions[-1]
+            baseline_revision = self.get_first_rev_not_by_uploader(all_revisions)
         else:
             baseline_revision = revs_before_cutoff[0]
         return baseline_revision
 
+    def get_first_rev_not_by_uploader(self, all_revisions):
+        """
+        Return the earliest revision by a user different from the uploader.
+
+        If no such revision is found, return the last revision instead.
+        """
+        uploader = all_revisions[-1]["userid"]
+        for rev in reversed(all_revisions[:-1]):
+            if rev["userid"] != uploader:
+                return rev
+        # there are no revisions by other users, return the last revision
+        return all_revisions[0]
 
     def process_descriptions(self):        
         info_template = self.assistant.config.config.get("info_template")
