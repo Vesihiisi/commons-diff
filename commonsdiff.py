@@ -50,7 +50,6 @@ import re
 import dateutil.parser as date_parser
 import pywikibot
 import mwparserfromhell
-import requests
 
 
 class Assistant(object):
@@ -94,21 +93,7 @@ class Assistant(object):
     def create_pywikibot_timestamp(self, stringdate):
         return pywikibot.Timestamp.set_timestamp(date_parser.parse(stringdate))
 
-    def get_revision_data(self, revid):
-        query_params = {
-        "action": "query",
-        "format": "json",
-        "prop": "revisions",
-        "revids": revid,
-        "formatversion": "2",
-        "rvprop": "ids|comment|content|contentmodel|timestamp|user",
-        "rvslots": "mediainfo"
-        }
-        response = requests.get(self.commons_api, params = query_params, timeout=30)
-        return response.json()
-
     def __init__(self, config, site):
-        self.commons_api = "https://commons.wikimedia.org/w/api.php"
         self.config = config
         self.site = site
 
@@ -153,6 +138,11 @@ class CommonsFile(object):
                     content = template.get(field_name).value.strip()
                     return content
 
+    def get_revision_content(self, revision):
+        # content loading needs to be forced (only fetches it if needed)
+        revid = revision.revid
+        _ = self.commons_page.getOldVersion(revid, force=True)
+        return self.commons_page._revisions[revid]
 
     def get_baseline_revision(self):
         baseline_date = self.assistant.create_pywikibot_timestamp(self.cutoff)
@@ -214,10 +204,10 @@ class CommonsFile(object):
             for key in labels.keys():
                 captions.append({key:labels.get(key).get('value')})
 
-        old_revision = self.assistant.get_revision_data(self.baseline_revision.revid)
-        old_revision_slots = old_revision.get("query").get("pages")[0].get("revisions")[0].get("slots")
-        if old_revision_slots:
-            old_sdc_content = json.loads(old_revision_slots.get("mediainfo").get("content"))
+        old_mediainfo = self.baseline_revision.get("slots").get("mediainfo")
+        if old_mediainfo:
+            old_revision_content = self.get_revision_content(self.baseline_revision)
+            old_sdc_content = json.loads(old_revision_content.get("slots").get("mediainfo").get("*"))
             old_sdc_labels = old_sdc_content.get("labels")
             if old_sdc_labels:
                 for key in old_sdc_labels.keys():
@@ -248,11 +238,10 @@ class CommonsFile(object):
                         statement_value = y.get("mainsnak").get("datavalue").get("value").get("id")
                         current_statements.append((statement_property, statement_value))
 
-        old_revision = self.assistant.get_revision_data(self.baseline_revision.revid)
-        old_revision_slots = old_revision.get("query").get("pages")[0].get("revisions")[0].get("slots")
-
-        if old_revision_slots:
-            old_sdc_content = json.loads(old_revision_slots.get("mediainfo").get("content"))
+        old_mediainfo = self.baseline_revision.get("slots").get("mediainfo")
+        if old_mediainfo:
+            old_revision_content = self.get_revision_content(self.baseline_revision)
+            old_sdc_content = json.loads(old_revision_content.get("slots").get("mediainfo").get("*"))
             old_sdc_statements = old_sdc_content.get("statements")
             for x in old_sdc_statements:
                 if x in relevant_sdc:
