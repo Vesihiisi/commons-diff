@@ -54,7 +54,7 @@ import requests
 
 
 class Assistant(object):
-    
+
     def package_results(self, results, cutoff, source):
         config_data = self.config.dump_self()
         timestamp = datetime.datetime.now().replace(microsecond=0).isoformat()
@@ -66,13 +66,13 @@ class Assistant(object):
                         "files": len(results)
                        }
                }
-        
-    
+
+
     def json_to_file(self, data, filename):
         with open(filename, "w", encoding='utf8') as datafile:
             json.dump(data, datafile, ensure_ascii=False, sort_keys=True, indent=4)
             print("Saved data of {} files to {}".format(len(data), filename))
-    
+
     def read_data_filelist(self, filename):
         datalist = []
         print("Loading files from list: {}".format(filename))
@@ -81,7 +81,7 @@ class Assistant(object):
                 datalist.append(line.strip())
         print("Loaded {} filenames.".format(len(datalist)))
         return datalist
-    
+
     def read_data_category(self, categoryname):
         datalist = []
         print("Loading files from category: {}".format(categoryname))
@@ -89,11 +89,11 @@ class Assistant(object):
         for x in cat.members(member_type=['file']):
             datalist.append(x.title())
         return datalist
-        
-    
+
+
     def create_pywikibot_timestamp(self, stringdate):
         return pywikibot.Timestamp.set_timestamp(date_parser.parse(stringdate))
-    
+
     def get_revision_data(self, revid):
         query_params = {
         "action": "query",
@@ -104,7 +104,7 @@ class Assistant(object):
         "rvprop": "ids|comment|content|contentmodel|timestamp|user",
         "rvslots": "mediainfo"
         }
-        response = requests.get(self.commons_api, params = query_params)
+        response = requests.get(self.commons_api, params = query_params, timeout=30)
         return response.json()
 
     def __init__(self, config, site):
@@ -113,15 +113,15 @@ class Assistant(object):
         self.site = site
 
 class Config(object):
-    
+
     def load_json_file(self, filepath):
         with open(filepath) as json_file:
             return json.loads(json_file.read())
-    
+
     def dump_self(self):
         return self.config
-    
-    
+
+
     def __init__(self, filepath):
         self.config = self.load_json_file(filepath)
 
@@ -129,7 +129,7 @@ class Config(object):
 
 class CommonsFile(object):
 
-    
+
     def get_categories(self, page_text):
         categories = []
         regex_categories = r"\[\[Category\:(.*?)\]\]"
@@ -137,7 +137,7 @@ class CommonsFile(object):
         for cat in all_categories:
             categories.append(cat.split("|")[0])
         return categories
-    
+
     def create_commons_page(self, filename, site):
         if not filename.startswith("File:"):
             filename = "File:{}".format(filename)
@@ -168,12 +168,12 @@ class CommonsFile(object):
         return baseline_revision
 
 
-    def process_descriptions(self):        
+    def process_descriptions(self):
         info_template = self.assistant.config.config.get("info_template")
-        
+
         templ = list(info_template.keys())[0]
         field = info_template.get(templ)
-        
+
         current_description = self.get_field_content(templ, field, self.current_page_content)
         baseline_description = self.get_field_content(templ, field, self.baseline_page_content)
         descriptions = {"old": baseline_description, "new": current_description, "changed": False}
@@ -202,7 +202,7 @@ class CommonsFile(object):
         if data.get('entities').get(mid).get('pageid'):
             return data.get('entities').get(mid)
         return {}
-    
+
     def process_captions(self):
 
         captions = []
@@ -222,23 +222,23 @@ class CommonsFile(object):
             if old_sdc_labels:
                 for key in old_sdc_labels.keys():
                     old_captions.append({key:labels.get(key).get('value')})
-        
+
         for captionpair in captions:
             if captionpair not in old_captions:
                 added_captions.append(captionpair)
         for captionpair in old_captions:
             if captionpair not in captions:
                 removed_captions.append(captionpair)
-        
+
         return {"added": added_captions, "removed": removed_captions}
-    
+
     def process_statements(self):
         current_statements = []
         old_statements = []
         added_statements = []
         removed_statements = []
         relevant_sdc = self.assistant.config.config.get("relevant_sdc")
-        
+
         all_statements = self.sdc.get("statements")
         if all_statements:
             for x in all_statements:
@@ -247,10 +247,10 @@ class CommonsFile(object):
                         statement_property = x
                         statement_value = y.get("mainsnak").get("datavalue").get("value").get("id")
                         current_statements.append((statement_property, statement_value))
-        
+
         old_revision = self.assistant.get_revision_data(self.baseline_revision.revid)
         old_revision_slots = old_revision.get("query").get("pages")[0].get("revisions")[0].get("slots")
-        
+
         if old_revision_slots:
             old_sdc_content = json.loads(old_revision_slots.get("mediainfo").get("content"))
             old_sdc_statements = old_sdc_content.get("statements")
@@ -269,11 +269,11 @@ class CommonsFile(object):
                 removed_statements.append(stmnt)
 
         return {"added": added_statements, "removed": removed_statements}
-    
+
     def get_creation_date(self):
         return self.commons_page.oldest_revision.timestamp.isoformat()
 
-    
+
     def process_history(self):
         self.baseline_revision = self.get_baseline_revision()
         self.baseline_page_content = self.commons_page.getOldVersion(self.baseline_revision.revid)
@@ -285,7 +285,7 @@ class CommonsFile(object):
         self.file_history_data["captions"] = self.process_captions()
         self.file_history_data["statements"] = self.process_statements()
         self.file_history_data["uploaded"] = self.get_creation_date()
-        
+
 
     def __init__(self, filename, assistant, cutoff, site):
         self.commons_page = self.create_commons_page(filename, site)
@@ -302,12 +302,11 @@ class CommonsFile(object):
 
 def main(arguments):
     site = pywikibot.Site("commons", "commons")
-    filelist = arguments.get("list")
     cutoff = arguments.get("cutoff")
     assistant = Assistant(Config(arguments.get("config")), site)
-    
+
     history_dump = []
-    
+
     if arguments.get("out"):
         filename = arguments.get("out")
     else:
@@ -326,9 +325,9 @@ def main(arguments):
         except pywikibot.exceptions.NoPageError:
             continue
         history_dump.append(commons_file.file_history_data)
-    
+
     results = assistant.package_results(history_dump, cutoff, source)
-    
+
     assistant.json_to_file(results, filename)
 
 
