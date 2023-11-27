@@ -44,12 +44,12 @@ be used.
 """
 
 import argparse
-import dateutil.parser as date_parser
 import datetime
 import json
+import re
+import dateutil.parser as date_parser
 import pywikibot
 import mwparserfromhell
-import re
 import requests
 
 
