@@ -41,36 +41,6 @@ So the three things we specify are 1) which infotemplate to process, 2) inside t
 infotemplate, which field to process (contains descriptions to diff), 3) which SDC
 statements to diff (P180 is depicts).
 
-OUTPUT contains
-
-
-meta
-
-
-config
-
-* baseline_revision: 724624878
-* captions: [{'sv': 'Sked, kniv och gaffel'}, {'en': 'Spoon, knife and fork'}]
-* categories, added and removed (relative to cutoff time)
-* description:
-** changed: T/F
-** new
-** old
-* filename
-* statements:
-** added: [('P180', 'Q81895'), ('P180', 'Q32489'), ('P180', 'Q81881')]
-** removed (same format)
-
-The output is a json dumped to a file.
-
-TODO
-
-* Add current revision ID to file data dump.
-
-
-* Do we want to include WHO made the change
-** and would that be horrible to write
-
 
 """
 
