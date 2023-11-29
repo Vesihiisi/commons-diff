@@ -17,14 +17,31 @@ The input file has to bee a JSON file made by commonsdiff.py
 """""
 
 
-WIKIDATA_CACHE = {}
+WIKIDATA_CACHE = {"labels": {}, "instance_of": {}}
+
+
+def check_if_human(qid):
+    """Check if the item of given QID has instance of: human"""
+    instance_of = "P31"
+    human = "Q5"
+    site = pywikibot.Site("wikidata", "wikidata")
+    repo = site.data_repository()
+    if WIKIDATA_CACHE.get("instance_of").get(qid):
+        instance_value = WIKIDATA_CACHE.get("labels").get(qid)
+    else:
+        item = pywikibot.ItemPage(repo, qid)
+        if item.claims.get(instance_of):
+            for claim in item.claims.get(instance_of):
+                target = claim.getTarget()
+                return target.id == human
+    return False
 
 
 def get_label_from_wd_item(qid, language_code, fallback_language_code):
     site = pywikibot.Site("wikidata", "wikidata")
     repo = site.data_repository()
-    if WIKIDATA_CACHE.get(qid):
-        item_label = WIKIDATA_CACHE.get(qid)
+    if WIKIDATA_CACHE.get("labels").get(qid):
+        item_label = WIKIDATA_CACHE.get("labels").get(qid)
     else:
         item = pywikibot.ItemPage(repo, qid)
         item_dict = item.get()
@@ -32,7 +49,7 @@ def get_label_from_wd_item(qid, language_code, fallback_language_code):
         if not item_label:
             item_label = item_dict["labels"].get(
                 fallback_language_code)  # what if none in either?
-        WIKIDATA_CACHE[qid] = item_label
+        WIKIDATA_CACHE["labels"][qid] = item_label
     return item_label
 
 
@@ -86,6 +103,7 @@ def convert_to_nordic_museum(content, target_filename):
         writer = csv.writer(outputfile)
         header = ["invno", "filename", "added_category",
                   "added_depicts_q", "added_depicts_label",
+                  "added_depicts_human",
                   "added_caption_sv", "updated_description_sv"]
         writer.writerow(header)
     for x in meat_content:
@@ -111,22 +129,23 @@ def convert_to_nordic_museum(content, target_filename):
                 depicts_value = sdc[1]
                 depicts_label = get_label_from_wd_item(
                     depicts_value, "sv", "en")
+                human = check_if_human(depicts_value)
                 with open(target_filename, 'a', newline='') as outputfile:
                     writer = csv.writer(outputfile)
                     writer.writerow(
                         [nordic_id, filename, "",
-                         depicts_value, depicts_label, "", "", ""])
+                         depicts_value, depicts_label, human, "", "", ""])
         for caption in added_captions:
             caption_meat = caption.get("sv")
             with open(target_filename, 'a', newline='') as outputfile:
                 writer = csv.writer(outputfile)
                 writer.writerow(
-                    [nordic_id, filename, "", "", "", caption_meat, ""])
+                    [nordic_id, filename, "", "", "", "", caption_meat, ""])
         if updated_description:
             with open(target_filename, 'a', newline='') as outputfile:
                 writer = csv.writer(outputfile)
                 writer.writerow(
-                    [nordic_id, filename, "", "", "", "", updated_description])
+                    [nordic_id, filename, "", "", "", "","", updated_description])
     print("Saved {}.".format(target_filename))
 
 
