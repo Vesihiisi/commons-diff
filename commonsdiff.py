@@ -307,6 +307,7 @@ def main(arguments):
     if arguments.get("category"):
         source = "Category:{}".format(arguments.get("category"))
         filename_base = arguments.get("category")
+        filename_base = filename_base.replace(" ", "_").replace("/", "-")
         files = assistant.read_data_category(arguments.get("category"))
     elif arguments.get("list"):
         source = arguments.get("list")
