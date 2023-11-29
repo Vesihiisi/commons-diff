@@ -1,4 +1,3 @@
-
 # commons-diff
 
 Process changes to file pages on Wikimedia Commons since a specific date.
@@ -9,6 +8,11 @@ Process changes to file pages on Wikimedia Commons since a specific date.
  * * selected SDC statements.
 
 For example output, see `example_output.json`
+
+## Background
+Created as part of the project [100 000 Bildminnen](https://commons.wikimedia.org/wiki/Commons:Nordiska_museet/100_000_Bildminnen), a collaboration between Nordiska museet in Stockholm and Wikimedia Sverige. The purpose being the museum wanting to crowdsource more information about photos from their archives.
+
+This project consists of two parts, `commonsdiff.py` meant to be a general tool for harvesting user changes, and `process_changes_nordic_museum.py` that formats the output in a way requested specifically by Nordiska museet.
 
   
 
