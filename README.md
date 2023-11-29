@@ -48,8 +48,6 @@ adapted to the needs of the Nordic Museum in the project [100 000 Bildminnen](ht
 
 It breaks down the structured information into one row per piece of information added, making it easier to process filed with multiple categories or SDC statements added.
 
-It also extracts specifically the museum's inventory number from the name of the file, taking advantage of the fact that files uploaded by WMSE follow a specific naming practice.
-
 Each row starts with the inventory number and filename.
 
 Usage:
@@ -57,3 +55,12 @@ Usage:
 `python3 process_changes_nordic_museum.py --source out_examplelist.json`
 
 See the file `out_examplelist.csv` for an example of what is produced.
+
+Some significant things that are done:
+
+* Check for whether a Depicted object is a person (has instance of == human on Wikidata).
+* Ignore categories starting with `100 000 Bildminnen`, they're internal organization categories in the project. Sometimes they can be added a longer time after the file upload but do not add valuable information.
+* Only include wikitext description (in Swedish) if it has been edited.
+* Only output SDC caption in Swedish.
+* Add Swedish labels to depicted items.
+* Add the the museum's inventory number extracted from the name of the file, taking advantage of the fact that files uploaded by WMSE follow a specific naming practice
