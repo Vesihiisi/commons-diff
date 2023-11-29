@@ -1,0 +1,272 @@
+{
+    "config": {
+        "info_template": {
+            "Nordiska museet Bildminnen image": "description"
+        },
+        "relevant_sdc": [
+            "P180"
+        ]
+    },
+    "meta": {
+        "cutoff": "2023-01-01",
+        "files": 7,
+        "source": "examplelist.txt",
+        "timestamp": "2023-11-29T11:06:40"
+    },
+    "results": [
+        {
+            "baseline_revision": "822110845",
+            "captions": {
+                "added": [],
+                "removed": []
+            },
+            "categories": {
+                "added": [
+                    "100 000 Bildminnen/Cars",
+                    "Renault 4"
+                ],
+                "removed": []
+            },
+            "description": {
+                "changed": false,
+                "new": "{{sv|Svenska Renault AB. Bilar i natur}}",
+                "old": "{{sv|Svenska Renault AB. Bilar i natur}}"
+            },
+            "filename": "Svenska Renault AB. Bilar i natur - Nordiska museet - NMAx.0030805.tif",
+            "statements": {
+                "added": [],
+                "removed": []
+            },
+            "uploaded": "2023-11-15T19:05:38Z"
+        },
+        {
+            "baseline_revision": "724624878",
+            "captions": {
+                "added": [
+                    {
+                        "sv": "Sked, kniv och gaffel"
+                    },
+                    {
+                        "en": "Spoon, knife and fork"
+                    }
+                ],
+                "removed": []
+            },
+            "categories": {
+                "added": [
+                    "Images from Nordiska museet: 2023-01",
+                    "Erik Holmén",
+                    "100 000 Bildminnen/Nordiska kompaniet"
+                ],
+                "removed": []
+            },
+            "description": {
+                "changed": true,
+                "new": "{{sv|Bestick: sked, kniv, gaffel.}}",
+                "old": "{{sv|Bestick, sked, kniv, gaffel}}"
+            },
+            "filename": "Bestick, sked, kniv, gaffel - Nordiska museet - Nordiska kompaniet NK K3c 2 0014.tif",
+            "statements": {
+                "added": [
+                    [
+                        "P180",
+                        "Q81895"
+                    ],
+                    [
+                        "P180",
+                        "Q32489"
+                    ],
+                    [
+                        "P180",
+                        "Q81881"
+                    ]
+                ],
+                "removed": []
+            },
+            "uploaded": "2023-01-12T10:04:15Z"
+        },
+        {
+            "baseline_revision": "825845642",
+            "captions": {
+                "added": [
+                    {
+                        "sv": "Flera kvinnor går på trottoaren på Champs Élysées i Paris, till höger syns butiken \"André\". I bakgrunden syns Arc de Triomphe."
+                    },
+                    {
+                        "de": "Mehrere junge Frauen spazieren an der Champs Élysées in Paris. Rechts ist ein Laden mit der Aufschrift \"André\" zu sehen. Im Hintergrund sieht man den Arc de Triomphe."
+                    },
+                    {
+                        "en": "Several young women take a walk on the Champs Élysée in Paris. In the background you can see the Arc de Triomphe."
+                    }
+                ],
+                "removed": []
+            },
+            "categories": {
+                "added": [
+                    "Avenue des Champs-Élysées (Paris)",
+                    "Paris in the 1960s"
+                ],
+                "removed": []
+            },
+            "description": {
+                "changed": false,
+                "new": "{{sv|Tyskland Berlin, allmänt}}",
+                "old": "{{sv|Tyskland Berlin, allmänt}}"
+            },
+            "filename": "Tyskland Berlin, allmänt - Nordiska museet - NMAx.0032518.tif",
+            "statements": {
+                "added": [
+                    [
+                        "P180",
+                        "Q64436"
+                    ],
+                    [
+                        "P180",
+                        "Q550"
+                    ]
+                ],
+                "removed": []
+            },
+            "uploaded": "2023-11-28T10:48:55Z"
+        },
+        {
+            "baseline_revision": "732551552",
+            "captions": {
+                "added": [],
+                "removed": []
+            },
+            "categories": {
+                "added": [
+                    "100 000 Bildminnen/Helsingborg",
+                    "Photographs by K.W. Gullers",
+                    "Runar Karlströmer"
+                ],
+                "removed": [
+                    "100_000_Bildminnen/Helsingborg"
+                ]
+            },
+            "description": {
+                "changed": false,
+                "new": "{{sv|Runar Karlströmer Porträtt Hälsingborg}}",
+                "old": "{{sv|Runar Karlströmer Porträtt Hälsingborg}}"
+            },
+            "filename": "Runar Karlströmer Porträtt Hälsingborg - Nordiska museet - NMAx.0000779.tif",
+            "statements": {
+                "added": [
+                    [
+                        "P180",
+                        "Q5902468"
+                    ]
+                ],
+                "removed": []
+            },
+            "uploaded": "2023-02-14T16:50:46Z"
+        },
+        {
+            "baseline_revision": "761523218",
+            "captions": {
+                "added": [
+                    {
+                        "sv": "Flottister vid Nya varvet. Ryahamnen i bakgrunden."
+                    }
+                ],
+                "removed": []
+            },
+            "categories": {
+                "added": [
+                    "100 000 Bildminnen/Göteborgsboken",
+                    "1947 in Göteborg",
+                    "Nya Varvet"
+                ],
+                "removed": [
+                    "100_000_Bildminnen/Göteborgsboken"
+                ]
+            },
+            "description": {
+                "changed": false,
+                "new": "{{sv|Göteborgsboken}}",
+                "old": "{{sv|Göteborgsboken}}"
+            },
+            "filename": "Göteborgsboken - Nordiska museet - NMAx.0009363.tif",
+            "statements": {
+                "added": [],
+                "removed": []
+            },
+            "uploaded": "2023-05-10T14:56:02Z"
+        },
+        {
+            "baseline_revision": "761522596",
+            "captions": {
+                "added": [
+                    {
+                        "sv": "Gasverket med lilla och stora gasklockorna"
+                    }
+                ],
+                "removed": []
+            },
+            "categories": {
+                "added": [
+                    "100 000 Bildminnen/Göteborgsboken",
+                    "1947 in Göteborg",
+                    "Gasklockan, Göteborg"
+                ],
+                "removed": [
+                    "100_000_Bildminnen/Göteborgsboken"
+                ]
+            },
+            "description": {
+                "changed": false,
+                "new": "{{sv|Göteborgsboken}}",
+                "old": "{{sv|Göteborgsboken}}"
+            },
+            "filename": "Göteborgsboken - Nordiska museet - NMAx.0009361.tif",
+            "statements": {
+                "added": [
+                    [
+                        "P180",
+                        "Q10503242"
+                    ]
+                ],
+                "removed": []
+            },
+            "uploaded": "2023-05-10T14:53:43Z"
+        },
+        {
+            "baseline_revision": "732481004",
+            "captions": {
+                "added": [],
+                "removed": []
+            },
+            "categories": {
+                "added": [
+                    "100 000 Bildminnen/SAAB",
+                    "Saab 37 Viggen",
+                    "Photographs by Peter Gullers"
+                ],
+                "removed": [
+                    "100_000_Bildminnen/SAAB"
+                ]
+            },
+            "description": {
+                "changed": true,
+                "new": "{{sv|SAAB Flygverkstäderna i Linköping}}",
+                "old": "{{sv|SAAB Flygverkstäderna Linköping}}"
+            },
+            "filename": "SAAB Flygverkstäderna Linköping - Nordiska museet - NMAx.0002322.tif",
+            "statements": {
+                "added": [
+                    [
+                        "P180",
+                        "Q206592"
+                    ],
+                    [
+                        "P180",
+                        "Q178777"
+                    ]
+                ],
+                "removed": []
+            },
+            "uploaded": "2023-02-14T10:09:10Z"
+        }
+    ]
+}
