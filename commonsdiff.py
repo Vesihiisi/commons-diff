@@ -303,17 +303,14 @@ def main(arguments):
 
     history_dump = []
 
-    if arguments.get("out"):
-        filename = arguments.get("out")
-    else:
-        filename = "out_{}.{}".format(
-            datetime.datetime.now().replace(microsecond=0).isoformat(), "json")
 
     if arguments.get("category"):
         source = "Category:{}".format(arguments.get("category"))
+        filename_base = arguments.get("category")
         files = assistant.read_data_category(arguments.get("category"))
     elif arguments.get("list"):
         source = arguments.get("list")
+        filename_base = arguments.get("list").split(".")[0]
         files = assistant.read_data_filelist(arguments.get("list"))
     for fname in files:
         print("Processing: {}.".format(fname))
@@ -325,6 +322,11 @@ def main(arguments):
         history_dump.append(commons_file.file_history_data)
 
     results = assistant.package_results(history_dump, cutoff, source)
+
+    if arguments.get("out"):
+        filename = arguments.get("out")
+    else:
+        filename = "out_{}.json".format(filename_base)
 
     assistant.results_to_file(results, filename)
 
