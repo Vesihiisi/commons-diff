@@ -64,11 +64,10 @@ class Assistant(object):
         item_label = item_dict["labels"].get(language_code)
         if not item_label:
             item_label = item_dict["labels"].get(fallback_language_code)
-    
-    
+
     def array_to_string(self, array, delimiter):
         return delimiter.join(array)
-    
+
     def package_results(self, results, cutoff, source, output_format):
         config_data = self.config.dump_self()
         timestamp = datetime.datetime.now().replace(microsecond=0).isoformat()
@@ -103,7 +102,7 @@ class Assistant(object):
                 result_rows.append(result_row)
             packaged_results = result_rows
         return packaged_results
-    
+
     def results_to_file(self, data, filename, output_format):
         if output_format == "json":
             number_of_files = len(data)
@@ -111,13 +110,11 @@ class Assistant(object):
                 json.dump(data, datafile, ensure_ascii=False, sort_keys=True, indent=4)
         elif output_format == "csv":
             number_of_files = len(data) - 1
-            with open(filename, 'w') as f:
-                for line in data: 
+            with open(filename, 'w', encoding='utf8') as f:
+                for line in data:
                     f.write(f"{line}\n")
         print("Saved data of {} files to {}".format(number_of_files,
                                                     filename))
-
-    
     def read_data_filelist(self, filename):
         datalist = []
         print("Loading files from list: {}".format(filename))
@@ -135,13 +132,13 @@ class Assistant(object):
             datalist.append(x.title())
         return datalist
 
-
     def create_pywikibot_timestamp(self, stringdate):
         return pywikibot.Timestamp.set_timestamp(date_parser.parse(stringdate))
 
     def __init__(self, config, site):
         self.config = config
         self.site = site
+
 
 class Config(object):
 
@@ -153,14 +150,11 @@ class Config(object):
     def dump_self(self):
         return self.config
 
-
     def __init__(self, filepath):
         self.config = self.load_json_file(filepath)
 
 
-
 class CommonsFile(object):
-
 
     def get_categories(self, page_text):
         categories = []
@@ -174,7 +168,6 @@ class CommonsFile(object):
         if not filename.startswith("File:"):
             filename = "File:{}".format(filename)
         return pywikibot.FilePage(site, filename)
-
 
     def get_field_content(self, info_template, field_name, page_text):
         parsed_wikicode = mwparserfromhell.parse(page_text)
@@ -317,7 +310,6 @@ class CommonsFile(object):
                         old_statement_value = y.get("mainsnak").get("datavalue").get("value").get("id")
                         old_statements.append((old_statement_property, old_statement_value))
 
-
         for stmnt in current_statements:
             if stmnt not in old_statements:
                 added_statements.append(stmnt)
@@ -330,7 +322,6 @@ class CommonsFile(object):
     def get_creation_date(self):
         return self.commons_page.oldest_revision.timestamp.isoformat()
 
-
     def process_history(self):
         self.baseline_revision = self.get_baseline_revision()
         self.baseline_page_content = self.commons_page.getOldVersion(self.baseline_revision.revid)
@@ -342,7 +333,6 @@ class CommonsFile(object):
         self.file_history_data["captions"] = self.process_captions()
         self.file_history_data["statements"] = self.process_statements()
         self.file_history_data["uploaded"] = self.get_creation_date()
-
 
     def __init__(self, filename, assistant, cutoff, site):
         self.commons_page = self.create_commons_page(filename, site)
@@ -375,9 +365,7 @@ def main(arguments):
     else:
         filename = "out_{}.{}".format(datetime.datetime.now().replace(microsecond=0).isoformat(),
                                      output_format)
-        
-    
-    
+
     if arguments.get("category"):
         source = "Category:{}".format(arguments.get("category"))
         files = assistant.read_data_category(arguments.get("category"))
@@ -392,9 +380,9 @@ def main(arguments):
         except pywikibot.exceptions.NoPageError:
             continue
         history_dump.append(commons_file.file_history_data)
-    
+
     results = assistant.package_results(history_dump, cutoff, source, output_format)
-    
+
     assistant.results_to_file(results, filename, output_format)
 
 
