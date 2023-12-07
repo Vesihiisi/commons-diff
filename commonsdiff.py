@@ -1,27 +1,21 @@
-"""Process changes to file pages on Wikimedia Commons since a specific date
+"""
 
-Extracts changes that have been made since the defined date to:
+https://commons.wikimedia.org/wiki/Special:ApiSandbox#action=query&format=json&prop=contributors%7Crevisions&titles=File%3AFoo.jpg&formatversion=2
 
-* a specific field in the information template
-* SDC captions
-* selected SDC statements.
 
-For example output, see example_output.json
+EXKLUDERA BOTAR -> https://commons.wikimedia.org/wiki/Special:ApiSandbox#action=query&format=json&prop=contributors%7Crevisions&titles=File%3AFoo.jpg&formatversion=2&pcexcludegroup=bot
 
-If the file was uploaded after the defined date then the first edits by
-the uploader are excluded (as e.g. SDC is added in a separate edit from the upload).
 
-USAGE PARAMETERS
 
-* --cutoff 2023-01-10
+https://doc.wikimedia.org/pywikibot/stable/api_ref/pywikibot.page.html#page.BasePage.contributors
 
-Grab changes from the specific date
 
-* --list inputlist.txt
-* --category "Name of category on Commons"
 
-Use either of these to specify which files to use.
-If using --list, the list must consist of a list of files, eg
+USAGE
+
+python3 commons_diff_bildminnen.py --list inputlist.txt --cutoff 2023-01-10 --config configfile.json
+
+* inputlist.txt contains a list of files, eg
 
 Damskor - Nordiska museet - Nordiska kompaniet NK K3c 1 0134.tif
 Damskor - Nordiska museet - Nordiska kompaniet NK K3c 1 0130.tif
@@ -37,10 +31,6 @@ So the three things we specify are 1) which infotemplate to process, 2) inside t
 infotemplate, which field to process (contains descriptions to diff), 3) which SDC
 statements to diff (P180 is depicts).
 
-* --out outputfile.json
-
-Optional, name of output file. If not used, a generic timestamped filename will
-be used.
 
 """
 
