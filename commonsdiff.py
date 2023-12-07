@@ -120,6 +120,8 @@ class Assistant(object):
         print("Loading files from list: {}".format(filename))
         with open(filename, 'r') as data:
             for line in data:
+                if not line.strip():  # handle trailing newlines
+                    continue
                 datalist.append(line.strip())
         print("Loaded {} filenames.".format(len(datalist)))
         return datalist
