@@ -120,6 +120,8 @@ class Assistant(object):
         print("Loading files from list: {}".format(filename))
         with open(filename, 'r') as data:
             for line in data:
+                if not line.strip():  # handle trailing newlines
+                    continue
                 datalist.append(line.strip())
         print("Loaded {} filenames.".format(len(datalist)))
         return datalist
@@ -128,7 +130,7 @@ class Assistant(object):
         datalist = []
         print("Loading files from category: {}".format(categoryname))
         cat = pywikibot.Category(self.site, categoryname)
-        for x in cat.articles(namespaces=-2):
+        for x in cat.members(member_type=['file']):
             datalist.append(x.title())
         return datalist
 
