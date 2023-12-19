@@ -272,6 +272,8 @@ class CommonsFile(object):
             old_sdc_labels = old_sdc_content.get("labels")
             if old_sdc_labels:
                 for key in old_sdc_labels.keys():
+                    if not labels.get(key):  # deleted captions result in empty values
+                        continue
                     old_captions.append({key:labels.get(key).get('value')})
         
         # now we compare old and new captions
