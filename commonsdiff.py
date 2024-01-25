@@ -52,6 +52,7 @@ import re
 import dateutil.parser as date_parser
 import pywikibot
 import mwparserfromhell
+from tqdm import tqdm
 
 
 class Assistant(object):
@@ -377,7 +378,7 @@ def main(arguments):
         source = arguments.get("list")
         files = assistant.read_data_filelist(arguments.get("list"))
     print("Output format: ", output_format)
-    for fname in files:
+    for fname in tqdm(files, desc="Processing files", disable=arguments.get("quiet")):
         try:
             commons_file = CommonsFile(fname, assistant, cutoff, site)
             commons_file.process_history()
@@ -399,5 +400,6 @@ if __name__ == "__main__":
     parser.add_argument("--config", required=True)
     parser.add_argument("--out", required=False)
     parser.add_argument("--format")
+    parser.add_argument('-q', '--quiet', action='store_true')
     args = parser.parse_args()
     main(vars(args))
